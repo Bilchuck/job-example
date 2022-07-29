@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Candidate } from '../candidate/candidate.entity';
 
 export enum UserType {
   CANDIDATE = 'CANDIDATE',
@@ -13,9 +14,12 @@ export class User {
   @Column()
   email: string;
 
-  @Column()
+  @Column({ select: false })
   password: string;
 
   @Column({ enum: UserType })
   type: UserType;
+
+  @OneToOne(() => Candidate, (candidate) => candidate.user)
+  candidate: Candidate;
 }

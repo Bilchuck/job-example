@@ -1,4 +1,10 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { User } from '../users/user.entity';
 
 export enum TechCategory {
@@ -13,41 +19,41 @@ export enum TechCategory {
 // TODO
 export type TechSkills = string;
 
-@Entity()
+@Entity('candidates')
 export class Candidate {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @OneToOne(() => User)
-  @Column()
+  @OneToOne(() => User, (user) => user.candidate)
+  @JoinColumn()
   user: User;
 
   @Column({ nullable: true })
-  title: string;
+  title?: string;
 
   @Column({ nullable: true })
-  salary: number;
+  salary?: number;
 
   @Column({ nullable: true })
-  resume: string;
+  resume?: string;
 
   @Column({ nullable: true, enum: TechCategory })
-  category: TechCategory;
-
-  @Column({ nullable: true, type: 'longtext' })
-  description: string;
+  category?: TechCategory;
 
   @Column({ nullable: true })
-  experienceYears: number;
+  description?: string;
 
   @Column({ nullable: true })
-  country: string;
+  experienceYears?: number;
 
   @Column({ nullable: true })
-  city: string;
+  country?: string;
 
   @Column({ nullable: true })
-  skills: TechSkills[];
+  city?: string;
+
+  @Column({ nullable: true, type: 'json' })
+  skills?: TechSkills[];
 
   @Column()
   registrationStepsFinished: boolean;

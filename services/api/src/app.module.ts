@@ -2,20 +2,27 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
+import { CandidateModule } from './candidate/candidate.module';
 import { MinioModule } from './minio/minio.module';
-import { UsersModule } from './users/users.module';
+import { UserModule } from './users/user.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({ isGlobal: true }),
     MinioModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
         URL: configService.get('MINIO_URL'),
         PORT: configService.get('MINIO_PORT'),
-        MINIO_ACCESS_KEY: configService.get('MINIO_ACCESS_KEY', 'DEV_ACCESS_KEY'),
-        MINIO_SECRET_KEY: configService.get('MINIO_SECRET_KEY', 'DEV_SECRET_KEY'),
+        MINIO_ACCESS_KEY: configService.get(
+          'MINIO_ACCESS_KEY',
+          'DEV_ACCESS_KEY',
+        ),
+        MINIO_SECRET_KEY: configService.get(
+          'MINIO_SECRET_KEY',
+          'DEV_SECRET_KEY',
+        ),
       }),
     }),
     TypeOrmModule.forRootAsync({
@@ -34,7 +41,8 @@ import { UsersModule } from './users/users.module';
       }),
     }),
     AuthModule,
-    UsersModule,
+    UserModule,
+    CandidateModule,
   ],
 })
 export class AppModule {}

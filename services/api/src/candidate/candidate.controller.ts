@@ -3,7 +3,5 @@ import { CandidateService } from './candidate.service';
 
 @Controller('candidate')
 export class CandidateController {
-  constructor(
-    private readonly candidateService: CandidateService,
-  ) {}
+  constructor(private readonly candidateService: CandidateService) {}
 }

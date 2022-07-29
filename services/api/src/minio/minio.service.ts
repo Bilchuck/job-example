@@ -1,21 +1,22 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { MinioModuleOptions } from './minio.module';
 import { Client } from 'minio';
+import { MINIO_CONFIG_OPTIONS } from './minio.constants';
 
 @Injectable()
 export class MinioService {
   minioClient: Client;
 
   constructor(
-    @Inject('MINIO_CONFIG_OPTIONS')
+    @Inject(MINIO_CONFIG_OPTIONS)
     readonly options: MinioModuleOptions,
   ) {
     this.minioClient = new Client({
-        endPoint: options.URL || 'localhost',
-        port: options.PORT || 9000,
-        useSSL: true,
-        accessKey: options.MINIO_ACCESS_KEY,
-        secretKey: options.MINIO_SECRET_KEY,
+      endPoint: options.URL || 'localhost',
+      port: options.PORT || 9000,
+      useSSL: true,
+      accessKey: options.MINIO_ACCESS_KEY,
+      secretKey: options.MINIO_SECRET_KEY,
     });
   }
 
