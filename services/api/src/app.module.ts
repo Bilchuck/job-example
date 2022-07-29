@@ -2,10 +2,22 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
+import { MinioModule } from './minio/minio.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    MinioModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        URL: configService.get('MINIO_URL'),
+        PORT: configService.get('MINIO_PORT'),
+        MINIO_ACCESS_KEY: configService.get('MINIO_ACCESS_KEY', 'DEV_ACCESS_KEY'),
+        MINIO_SECRET_KEY: configService.get('MINIO_SECRET_KEY', 'DEV_SECRET_KEY'),
+      }),
+    }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -18,9 +30,11 @@ import { AuthModule } from './auth/auth.module';
         database: configService.get('DB_DATABASE', 'job'),
         migrations: [__dirname + '/migrations/*{.ts,.js}'],
         migrationsRun: true,
+        autoLoadEntities: true,
       }),
     }),
     AuthModule,
+    UsersModule,
   ],
 })
 export class AppModule {}

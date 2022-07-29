@@ -10,3 +10,16 @@ services:
       - .:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
+
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - ./storage/minio:/data
+    environment:
+      MINIO_ACCESS_KEY: DEV_ACCESS_KEY
+      MINIO_SECRET_KEY: DEV_SECRET_KEY
+    command: server --address 0.0.0.0:9000 --console-address "0.0.0.0:9001" /data
+

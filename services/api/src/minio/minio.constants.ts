@@ -1,0 +1,1 @@
+export const MINIO_CONFIG_OPTIONS = Symbol('MINIO_CONFIG_OPTIONS');
