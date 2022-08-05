@@ -1,0 +1,39 @@
+<div class="container col-md-6">
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input [class.is-invalid]="form.controls.email.invalid && (submitted)" type="email" class="form-control" formControlName="email" id="email" aria-describedby="email">
+      <div *ngIf="form.controls.email.errors?.['email']" class="invalid-feedback">
+        Email is not valid.
+      </div>
+      <div *ngIf="form.controls.email.errors?.['required']" class="invalid-feedback">
+        Email is required.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input [class.is-invalid]="form.controls.password.invalid && (submitted)"  type="password" class="form-control" formControlName="password" id="password">
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Repeat Password</label>
+      <input [class.is-invalid]="form.controls.repeatPassword.invalid && (submitted)"  type="password" class="form-control" formControlName="repeatPassword" id="repeatPassword">
+      <div *ngIf="form.controls.repeatPassword.errors?.['minlength']" class="invalid-feedback">
+        Password must be at least 6 characters long.
+      </div>
+      <div *ngIf="form.controls.repeatPassword.errors?.['required']" class="invalid-feedback">
+        Password is required.
+      </div>
+      <div *ngIf="form.controls.repeatPassword !== form.controls.password" class="invalid-feedback">
+        Password is required.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Type</label>
+      <select class="form-control" formControlName="type">
+        <option [value]="userTypes.CANDIDATE">Candidate</option>
+        <option [value]="userTypes.RECRUITER">Rectuiter</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Sign up</button>
+  </form>
+</div>

@@ -19,6 +19,31 @@ export enum TechCategory {
 // TODO
 export type TechSkills = string;
 
+class CandidateCV {
+  @Column({ nullable: true })
+  filePath?: string;
+
+  @Column({ nullable: true })
+  fileName?: string;
+}
+
+class CandidateContactData {
+  @Column({ nullable: true })
+  name?: string;
+
+  @Column({ nullable: true })
+  phone?: string;
+
+  @Column({ nullable: true })
+  email?: string;
+
+  @Column({ nullable: true })
+  skype?: string;
+
+  @Column(() => CandidateCV)
+  cv: CandidateCV;
+}
+
 @Entity('candidates')
 export class Candidate {
   @PrimaryGeneratedColumn()
@@ -28,14 +53,14 @@ export class Candidate {
   @JoinColumn()
   user: User;
 
+  @Column(() => CandidateContactData)
+  contactData: CandidateContactData;
+
   @Column({ nullable: true })
   title?: string;
 
   @Column({ nullable: true })
   salary?: number;
-
-  @Column({ nullable: true })
-  resume?: string;
 
   @Column({ nullable: true, enum: TechCategory })
   category?: TechCategory;
@@ -46,15 +71,9 @@ export class Candidate {
   @Column({ nullable: true })
   experienceYears?: number;
 
-  @Column({ nullable: true })
-  country?: string;
-
-  @Column({ nullable: true })
-  city?: string;
-
   @Column({ nullable: true, type: 'json' })
   skills?: TechSkills[];
 
-  @Column()
+  @Column({ default: false })
   registrationStepsFinished: boolean;
 }

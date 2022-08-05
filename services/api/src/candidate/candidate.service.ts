@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { MinioService } from '../minio/minio.service';
 import { Candidate } from './candidate.entity';
 
-type createCandidate = Omit<Candidate, 'id' | 'registrationStepsFinished'>;
+type createCandidate = Pick<Candidate, 'user'>;
 @Injectable()
 export class CandidateService {
   constructor(
@@ -16,7 +16,6 @@ export class CandidateService {
   createCandidate(candidate: createCandidate) {
     return this.candidateRepository.save({
       ...candidate,
-      registrationStepsFinished: false,
     });
   }
 }

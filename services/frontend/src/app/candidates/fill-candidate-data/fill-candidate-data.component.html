@@ -1,0 +1,77 @@
+<div class="container">
+  <h1 class="mb-5">Finish Candidate Profile:</h1>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div>
+      <div class="row">
+        <div class="col-sm">
+
+          <div class="mb-3">
+            <label class="mb-1" for="title">Title</label>
+            <input [class.is-invalid]="form.controls.title.invalid && (submitted)" type="text" class="form-control" id="title" formControlName="title">
+          </div>
+      
+          <div class="mb-3">
+            <label class="mb-1" for="firstName">Salary</label>
+            <input [class.is-invalid]="form.controls.salary.invalid && (submitted)" type="text" class="form-control" id="salary" formControlName="salary">
+          </div>
+      
+          <div class="mb-3">
+            <label class="mb-1" for="firstName">Main Stack</label>
+            <select [class.is-invalid]="form.controls.stack.invalid && (submitted)" class="form-control" id="stack" formControlName="stack" required>
+              <option selected disabled [value]="''" hidden>Select Stack</option>
+              <option *ngFor="let stack of stacks" [value]="stack">{{ stack }}</option>
+            </select>
+          </div>
+      
+          <div class="mb-3">
+            <label class="mb-1" for="firstName">Experience</label>
+            <select [class.is-invalid]="form.controls.experience.invalid && (submitted)" formControlName="experience" class="form-control" required>
+              <option selected disabled [value]="''" hidden>Select Experience</option>
+              <option *ngFor="let experience of experiences" [value]="experience">{{ experience }}</option>
+            </select>
+          </div>
+      
+          <div class="mb-3">
+            <label class="mb-1" for="firstName">Skills</label>
+            <input [class.is-invalid]="form.controls.skills.invalid && (submitted)" type="text" class="form-control" id="skills" formControlName="skills">
+          </div>
+      
+          <div class="mb-3">
+            <label class="mb-1" for="firstName">CV</label>
+            <input [class.is-invalid]="form.controls.cv.invalid && (submitted)" type="file" class="form-control" id="skills" #cvFileUpload formControlName="cv">
+          </div>
+        </div>
+        <div class="col-sm">
+
+          <div class="mb-3">
+            <label class="mb-1" for="firstName">Name</label>
+            <input [class.is-invalid]="form.controls.name.invalid && (submitted)" type="text" class="form-control" id="name" formControlName="name">
+          </div>
+          <div class="mb-3">
+            <label class="mb-1" for="phone">Phone</label>
+            <input [class.is-invalid]="form.controls.phone.invalid && (submitted)" type="text" class="form-control" id="phone" formControlName="phone">
+          </div>
+          <div class="mb-3">
+            <label class="mb-1" for="email">Email</label>
+            <input [class.is-invalid]="form.controls.email.invalid && (submitted)" type="email" class="form-control" id="email" formControlName="email">
+          </div>
+          <div class="mb-3">
+            <label class="mb-1" for="email">Skype</label>
+            <input [class.is-invalid]="form.controls.skype.invalid && (submitted)" type="email" class="form-control" id="skype" formControlName="skype">
+          </div>
+        </div>
+      </div>
+      
+      <div class="mb-3">
+        <label class="mb-1" for="firstName">Summary</label>
+        <textarea [class.is-invalid]="form.controls.summary.invalid && (submitted)" class="form-control" id="summary" formControlName="summary">
+        </textarea>
+      </div>
+      <button class="btn btn-primary">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>
