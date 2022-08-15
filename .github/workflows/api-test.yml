@@ -28,3 +28,7 @@ jobs:
         working-directory: services/api
       - run: npm test
         working-directory: services/api
+      - run: npm run lint
+        working-directory: services/api
+      - run: npm run prettier
+        working-directory: services/api

@@ -28,3 +28,5 @@ jobs:
         working-directory: services/frontend
       - run: npm test
         working-directory: services/frontend
+      - run: npm run lint
+        working-directory: services/frontend
