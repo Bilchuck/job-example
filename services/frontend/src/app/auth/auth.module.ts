@@ -18,12 +18,8 @@ import { AuthGuard } from './loggedIn.guard';
     }
   ],
 })
-export class AuthModule implements OnInit {
+export class AuthModule {
   constructor(
     private authApi: AuthApiService,
   ) {}
-
-  async ngOnInit() {
-    await this.authApi.checkAuthentication();
-  }
 }

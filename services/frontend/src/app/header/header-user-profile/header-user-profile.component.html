@@ -1,16 +1,12 @@
 <div class="user-data" *ngIf="(account$ | async)">
   Hey, {{ (account$ | async)?.email }}
-  <!-- <button>
-    show
-  </button> -->
-
   <ul>
     <li><a [routerLink]="['/profile']">Profile</a></li>
     <li><a [routerLink]="['/logout']" (click)="logOut($event)">Log out</a></li>
   </ul>
 </div>
 
-<div class="login" *ngIf="!(account$ | async)">
+<div class="login" *ngIf="(account$ | async) === null">
   <ul>
     <li><a [routerLink]="['/login']">Login</a></li>
     <li><a [routerLink]="['/register']">Register</a></li>

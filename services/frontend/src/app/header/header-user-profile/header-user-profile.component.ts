@@ -6,16 +6,12 @@ import { AuthService } from '../../auth/auth.service';
   templateUrl: './header-user-profile.component.html',
   styleUrls: ['./header-user-profile.component.scss']
 })
-export class HeaderUserProfileComponent implements OnInit {
+export class HeaderUserProfileComponent {
   account$ = this.auth.account$;
 
   constructor(
     private auth: AuthService,
   ) { }
-
-  ngOnInit(): void {
-    // const account = this.authService.account$;
-  }
 
   logOut(e: Event) {
     e.preventDefault();

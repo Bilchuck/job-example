@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { firstValueFrom } from 'rxjs';
+import { AuthService } from '../../auth/auth.service';
 import { CandidateService } from '../candidate.service';
 
 export enum TechCategory {
@@ -61,9 +62,25 @@ export class FillCandidateDataComponent implements OnInit {
     private candidateService: CandidateService,
     private router: Router,
     private toastr: ToastrService,
+    private auth: AuthService,
   ) { }
 
   ngOnInit(): void {
+    this.auth.account$.subscribe(user => {
+      if (user) {
+        this.form.controls.title.setValue(user.candidate.title ?? null);
+        this.form.controls.salary.setValue(user.candidate.salary ?? null);
+        this.form.controls.stack.setValue(user.candidate.stack ?? null);
+        this.form.controls.experience.setValue(user.candidate.experience ?? null);
+        this.form.controls.skills.setValue(user.candidate.skills ?? null);
+        this.form.controls.summary.setValue(user.candidate.summary ?? null);
+        this.form.controls.name.setValue(user.candidate.contactData.name ?? null);
+        this.form.controls.phone.setValue(user.candidate.contactData.phone ?? null);
+        this.form.controls.email.setValue(user.candidate.contactData.email ?? null);
+        this.form.controls.skype.setValue(user.candidate.contactData.skype ?? null);
+      }
+    })
+
   }
 
   async onSubmit() {

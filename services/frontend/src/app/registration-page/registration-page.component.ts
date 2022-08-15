@@ -1,5 +1,5 @@
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthApiService } from '../auth/auth-api.service';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './registration-page.component.html',
   styleUrls: ['./registration-page.component.scss']
 })
-export class RegistrationPageComponent implements OnInit {
+export class RegistrationPageComponent {
   form = new FormGroup({
     email: new FormControl<string>('', [Validators.email, Validators.required]),
     password: new FormControl<string>('', [Validators.minLength(6), Validators.required]),
@@ -32,9 +32,6 @@ export class RegistrationPageComponent implements OnInit {
         this.router.navigateByUrl('');
       }
     });
-  }
-
-  ngOnInit(): void {
   }
 
   async onSubmit() {
