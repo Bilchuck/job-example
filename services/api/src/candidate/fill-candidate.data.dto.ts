@@ -9,7 +9,7 @@ export class FillCanndateDataDTO {
   @Type(() => Number)
   @Transform(({ value }) => Number(value))
   @IsNumber()
-  salary: string;
+  salary: number;
 
   @IsEnum(TechCategory)
   stack: TechCategory;

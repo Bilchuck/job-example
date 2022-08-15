@@ -14,7 +14,7 @@ export class MinioService {
     this.minioClient = new Client({
       endPoint: options.URL || 'localhost',
       port: options.PORT || 9000,
-      useSSL: true,
+      useSSL: false,
       accessKey: options.MINIO_ACCESS_KEY,
       secretKey: options.MINIO_SECRET_KEY,
     });

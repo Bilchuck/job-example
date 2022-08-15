@@ -16,7 +16,7 @@ const routes: Routes = [
     // canActivate: [AuthGuard],
   },
   {
-    path: 'fill-data',
+    path: 'profile',
     component: FillCandidateDataComponent,
   },
   {

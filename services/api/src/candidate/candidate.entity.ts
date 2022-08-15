@@ -63,13 +63,13 @@ export class Candidate {
   salary?: number;
 
   @Column({ nullable: true, enum: TechCategory })
-  category?: TechCategory;
+  stack?: TechCategory;
 
   @Column({ nullable: true })
-  description?: string;
+  summary?: string;
 
   @Column({ nullable: true })
-  experienceYears?: number;
+  experience?: string;
 
   @Column({ nullable: true, type: 'json' })
   skills?: TechSkills[];
